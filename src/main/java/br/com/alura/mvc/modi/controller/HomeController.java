@@ -1,5 +1,7 @@
 package br.com.alura.mvc.modi.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +21,10 @@ public class HomeController {
 	private PedidoRepository pedidoRepository;
 	
 	@GetMapping
-	public String home(Model model) {
+	public String home(Model model, Principal principal) {
 //		List<Pedido> pedidos = pedidoRepository.findAll();
 //		model.addAttribute("pedidos",pedidos);
-		model.addAttribute("pedidos",pedidoRepository.findAll());
+		model.addAttribute("pedidos",pedidoRepository.findAllByUsuario(principal.getName()));
 		return "home";
 	}
 	
